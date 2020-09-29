@@ -4,7 +4,7 @@ export default [
     component: '../layouts/UserLayout',
     routes: [
       {
-        name: 'login',
+        name: '登陆',
         path: '/user/login',
         component: './user/login',
       },
@@ -25,20 +25,20 @@ export default [
           },
           {
             path: '/welcome',
-            name: 'welcome',
+            name: '欢迎页',
             icon: 'smile',
             component: './Welcome',
           },
           {
             path: '/admin',
-            name: 'admin',
+            name: '管理页',
             icon: 'crown',
             component: './Admin',
             authority: ['admin'],
             routes: [
               {
                 path: '/admin/sub-page',
-                name: 'sub-page',
+                name: '次管理页',
                 icon: 'smile',
                 component: './Welcome',
                 authority: ['admin'],
@@ -46,7 +46,7 @@ export default [
             ],
           },
           {
-            name: 'list.table-list',
+            name: '表格示例',
             icon: 'table',
             path: '/list',
             component: './ListTableList',

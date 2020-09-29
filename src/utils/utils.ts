@@ -22,3 +22,23 @@ export const isAntDesignProOrDev = (): boolean => {
 };
 
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
+
+export const getBreadcrumb = (path: string, routes: any) => {
+  const list:{name: string, path: string}[] = []
+
+  if (path === '/') return list
+
+  const splicingBreadcrumb = (pathName: string, routeList: any[], infoList: {name: string, path: string}[]) => {
+    routeList.forEach(item => {
+      const pathReg = new RegExp(`^${item.path}`)
+      if (item.path !== '/' && pathReg.test(pathName)) {
+        list.push({name: item.name, path: item.path})
+      }
+      if (item.children?.length) {splicingBreadcrumb(pathName, item.children, infoList)}
+    })
+  }
+
+  splicingBreadcrumb(path, routes, list)
+
+  return list
+}

@@ -1,9 +1,10 @@
 import { Tooltip, Tag, Breadcrumb } from 'antd';
-import { Settings as ProSettings } from '@ant-design/pro-layout';
+import { Settings as ProSettings, BasicLayoutProps } from '@ant-design/pro-layout';
 import { QuestionCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import React from 'react';
-import { connect, ConnectProps, SelectLang } from 'umi';
+import { connect, ConnectProps, SelectLang, useLocation } from 'umi';
 import { ConnectState } from '@/models/connect';
+import { getBreadcrumb } from '@/utils/utils';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
@@ -12,6 +13,7 @@ export interface GlobalHeaderProps extends Partial<ConnectProps>, Partial<ProSet
   theme?: ProSettings['navTheme'] | 'realDark';
   onCollapse: (collapsed: boolean) => void;
   collapsed?: boolean;
+  route: BasicLayoutProps['route'];
 }
 
 const ENVTagColor = {
@@ -21,12 +23,16 @@ const ENVTagColor = {
 };
 
 const GlobalHeader: React.SFC<GlobalHeaderProps> = (props) => {
-  const { theme, layout, collapsed, onCollapse } = props;
+  const { theme, layout, collapsed, onCollapse, route } = props;
   let className = styles.header;
 
   if (theme === 'dark' && layout === 'top') {
     className = `${styles.header}  ${styles.dark}`;
   }
+
+  const currentPath = useLocation().pathname
+  const routeList = route?.routes || []
+  const breadcrumbInfoList = getBreadcrumb(currentPath, routeList)
 
   return (
     <div className={className}>
@@ -38,7 +44,13 @@ const GlobalHeader: React.SFC<GlobalHeaderProps> = (props) => {
             <MenuFoldOutlined onClick={() => onCollapse(true)} />
           )}
         </div>
-        <Breadcrumb />
+        <Breadcrumb>
+          {
+            breadcrumbInfoList.map(item =>
+              <Breadcrumb.Item><a href={item.path}>{item.name}</a></Breadcrumb.Item>
+            )
+          }
+        </Breadcrumb>
       </div>
       <div className={styles.rightContent}>
         <HeaderSearch

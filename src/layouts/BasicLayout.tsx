@@ -157,7 +157,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       }}
       footerRender={() => defaultFooterDom}
       menuDataRender={menuDataRender}
-      headerContentRender={({collapsed}) => <GlobalHeader collapsed={collapsed} onCollapse={handleMenuCollapse} />}
+      headerContentRender={({collapsed}) => <GlobalHeader collapsed={collapsed} route={props.route} onCollapse={handleMenuCollapse} />}
       postMenuData={(menuData) => {
         menuDataRef.current = menuData || [];
         return menuData || [];
