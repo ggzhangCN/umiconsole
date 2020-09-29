@@ -12,55 +12,72 @@
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 48px;
-  margin-left: auto;
-  overflow: hidden;
-  background: #fff;
-  .leftContent {
+  height: 96px;
+  .mainHeader {
     display: flex;
     align-items: center;
-    :global {
-      .ant-breadcrumb {
-        margin-left: 20px;
-      }
-    }
-  }
-  .rightContent {
-    display: flex;
-    align-items: center;
-    .action {
+    justify-content: space-between;
+    height: 48px;
+    margin-left: auto;
+    padding: 0 16px;
+    overflow: hidden;
+    color: #fff;
+    background: #001529;
+    .leftContent {
       display: flex;
       align-items: center;
-      height: 100%;
-      padding: 0 12px;
-      cursor: pointer;
-      transition: all 0.3s;
-      > span {
-        vertical-align: middle;
-      }
-      &:hover {
-        background: @pro-header-hover-bg;
-      }
-      &:global(.opened) {
-        background: @pro-header-hover-bg;
-      }
-    }
-    .search {
-      padding: 0 12px;
-      &:hover {
-        background: transparent;
+      :global {
+        .ant-breadcrumb {
+          margin-left: 20px;
+          & > span {
+            .ant-breadcrumb-link a,
+            .ant-breadcrumb-separator {
+              color: rgba(255, 255, 255, 0.45);
+            }
+          }
+          & > span:last-child {
+            .ant-breadcrumb-link a,
+            .ant-breadcrumb-separator {
+              color: rgba(255, 255, 255, 0.85);
+            }
+          }
+        }
       }
     }
-    .account {
-      .avatar {
-        margin: ~'calc((@{layout-header-height} - 24px) / 2)' 0;
-        margin-right: 8px;
-        color: @primary-color;
-        vertical-align: top;
-        background: rgba(255, 255, 255, 0.85);
+    .rightContent {
+      display: flex;
+      align-items: center;
+      .action {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+        > span {
+          vertical-align: middle;
+        }
+        &:hover {
+          background: @pro-header-hover-bg;
+        }
+        &:global(.opened) {
+          background: @pro-header-hover-bg;
+        }
+      }
+      .search {
+        padding: 0 12px;
+        &:hover {
+          background: transparent;
+        }
+      }
+      .account {
+        .avatar {
+          margin: ~'calc((@{layout-header-height} - 24px) / 2)' 0;
+          margin-right: 8px;
+          color: @primary-color;
+          vertical-align: top;
+          background: rgba(255, 255, 255, 0.85);
+        }
       }
     }
   }
